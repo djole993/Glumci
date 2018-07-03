@@ -7,7 +7,6 @@ import com.example.bulatovic.glumci.db.model.Actor;
 import com.example.bulatovic.glumci.db.model.Movie;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -68,6 +67,7 @@ public class OrmLightHelper extends OrmLiteSqliteOpenHelper{
     @Override
     public void close() {
         mActorDao = null;
+        mMovieDao = null;
         super.close();
     }
 }

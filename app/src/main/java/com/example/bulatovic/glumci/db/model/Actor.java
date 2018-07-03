@@ -1,6 +1,8 @@
 package com.example.bulatovic.glumci.db.model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = Actor.TABLE_ACTOR_NAME)
@@ -12,6 +14,7 @@ public class Actor {
     public static final String FIELD_ACTOR_BIOGRAPHY = "biography";
     public static final String FIELD_ACTOR_SCORE = "skore";
     public static final String FIELD_ACTOR_BIRTH = "birth";
+    public static final String FIELD_NAMES_MOVIES = "movies";
 
     @DatabaseField(columnName = FIELD_ACTOR_ID, generatedId = true)
     private int id;
@@ -27,6 +30,9 @@ public class Actor {
 
     @DatabaseField(columnName = FIELD_ACTOR_SCORE)
     private float score;
+
+    @ForeignCollectionField(columnName = Actor.FIELD_NAMES_MOVIES, eager = true)
+    private ForeignCollection<Movie> movies;
 
     public Actor(){
 
@@ -71,6 +77,10 @@ public class Actor {
     public void setScore(float score) {
         this.score = score;
     }
+
+    public  ForeignCollection<Movie> getMovies() {return movies;}
+
+    public  void setMovies (ForeignCollection<Movie> movies) {this.movies = movies;}
 
     @Override
     public String toString() {

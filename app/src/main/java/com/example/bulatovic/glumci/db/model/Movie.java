@@ -20,8 +20,8 @@ public class Movie {
     private String genre;
     @DatabaseField(columnName = FIELD_MOVIE_YEAR)
     private String year;
-    @DatabaseField(columnName = FIELD_MOVIE_USER)
-    private Actor user;
+    @DatabaseField(columnName = FIELD_MOVIE_USER, foreign = true, foreignAutoRefresh = true)
+    private Actor mUser;
 
     public Movie(){}
 
@@ -58,11 +58,11 @@ public class Movie {
     }
 
     public Actor getUser() {
-        return user;
+        return mUser;
     }
 
-    public void setUser(Actor user) {
-        this.user = user;
+    public void setUser(Actor mUser) {
+        this.mUser = mUser;
     }
 
     @Override
