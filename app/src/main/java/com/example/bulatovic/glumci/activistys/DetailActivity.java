@@ -35,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText bio;
-    private EditText birht;
+    private EditText birth;
     private RatingBar rating;
 
     @Override
@@ -49,20 +49,20 @@ public class DetailActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        preferences = (GlumciPreferences) PreferenceManager.getDefaultSharedPreferences(this);
+       // preferences = (GlumciPreferences) PreferenceManager.getDefaultSharedPreferences(this);
         int key = getIntent().getExtras().getInt(MainActivity.ACTOR_KEY);
 
         try {
             a = getDatabaseHelper().getActorDao().queryForId(key);
 
             name = (EditText) findViewById(R.id.actor_name);
-            bio = (EditText) findViewById(R.id.actor_bio);
-            birht = (EditText) findViewById(R.id.actor_birth);
-            rating = (RatingBar) findViewById(R.id.actor_rating);
+            bio = (EditText) findViewById(R.id.actor_biography);
+            birth = (EditText) findViewById(R.id.actor_birth);
+            rating = (RatingBar) findViewById(R.id.acrtor_rating);
 
             name.setText(a.getName());
-            birht.setText(a.getBirth());
             bio.setText(a.getBio());
+            birth.setText(a.getBirth());
             rating.setRating(a.getScore());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.add_new_movie);
 
-                Button add = (Button) findViewById(R.id.add_movie);
+                Button add = (Button) dialog.findViewById(R.id.add_movie);
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -149,7 +149,7 @@ public class DetailActivity extends AppCompatActivity {
 
             case R.id.priprema_edit:
                 a.setName(name.getText().toString());
-                a.setBirth(birht.getText().toString());
+                a.setBirth(birth.getText().toString());
                 a.setBio(bio.getText().toString());
                 a.setScore(rating.getRating());
 

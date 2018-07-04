@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -53,17 +54,17 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView)findViewById(R.id.lista_glumaca);
 
         try {
-            List<Actor> glumci = getDatabaseHelper().getActorDao().queryForAll();
-            ArrayAdapter adapter = new  ArrayAdapter<>(MainActivity.this, R.layout.list_item, glumci);
+            List<Actor> list = getDatabaseHelper().getActorDao().queryForAll();
+
+            ListAdapter adapter = new ArrayAdapter<>(MainActivity.this, R.layout.list_item, list);
             listView.setAdapter(adapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Actor a = (Actor) listView.getItemAtPosition(position);
+                    Actor p = (Actor) listView.getItemAtPosition(position);
 
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                    intent.putExtra(ACTOR_KEY, a.getId());
+                    intent.putExtra(ACTOR_KEY, p.getId());
                     startActivity(intent);
                 }
             });
